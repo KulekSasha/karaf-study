@@ -15,5 +15,11 @@
     <packaging>bundle</packaging>
     <version>0.0.1</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

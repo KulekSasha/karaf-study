@@ -6,23 +6,75 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>karaf-study-parent</artifactId>
-
     <groupId>com.nix</groupId>
     <packaging>pom</packaging>
     <version>0.0.1</version>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <apache.cxf.version>3.1.9</apache.cxf.version>
+        <validation.api.version>1.1.0.Final</validation.api.version>
+        <hibernate.validator.version>5.2.4.Final</hibernate.validator.version>
+        <hibernate.version>5.2.4.Final</hibernate.version>
+        <lombok.version>1.16.12</lombok.version>
+    </properties>
+
+
     <modules>
         <module>n01-rest-string</module>
+        <module>n02-model</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--CXF-->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+                <version>${apache.cxf.version}</version>
+            </dependency>
+
+            <!--Validation-->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate.validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator-osgi-karaf-features</artifactId>
+                <version>5.2.4.Final</version>
+            </dependency>
+
+
+            <!--ORM Hibernate-->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <!--Lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-            <version>3.1.9</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
-
 
     <build>
         <defaultGoal>install</defaultGoal>
@@ -32,8 +84,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.5.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
