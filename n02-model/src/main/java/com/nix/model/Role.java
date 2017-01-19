@@ -8,6 +8,7 @@ import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.sql.DataSource;
 
 @Data
 @EqualsAndHashCode(exclude = {"id"})
@@ -26,4 +27,5 @@ public class Role {
     @NaturalId
     @NotEmpty
     private String name;
+
 }
