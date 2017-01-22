@@ -32,13 +32,16 @@
                     <manifestLocation>target/META-INF</manifestLocation>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Import-Package>!com.nix.cxf.restexample,
-                            javax.persistence,
-                            org.hibernate.proxy,
-                            org.h2.jdbcx,
-                            *
-                        </Import-Package>
+                        <Import-Package>*</Import-Package>
                     </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <configuration>
+                    
                 </configuration>
             </plugin>
         </plugins>
