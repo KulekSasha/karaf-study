@@ -16,11 +16,18 @@
         </cxf:features>
     </cxf:bus>
 
+   <!--<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>-->
 
     <jaxrs:server id="stringRestServer" address="/test_01">
         <jaxrs:serviceBeans>
             <ref component-id="stringRestServiceBean"/>
         </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </jaxrs:providers>
+        <!--<jaxrs:providers>-->
+            <!--<ref bean="jsonProvider"/>-->
+        <!--</jaxrs:providers>-->
     </jaxrs:server>
 
     <bean id="stringRestServiceBean" class="com.nix.cxf.restexample.StringRestServiceImpl">
