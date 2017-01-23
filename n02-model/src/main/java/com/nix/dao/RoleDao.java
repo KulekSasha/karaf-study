@@ -1,4 +1,6 @@
-package com.nix.model;
+package com.nix.dao;
+
+import com.nix.model.Role;
 
 public interface RoleDao {
 

@@ -24,10 +24,14 @@
     </jaxrs:server>
 
     <bean id="stringRestServiceBean" class="com.nix.cxf.restexample.StringRestServiceImpl">
-        <property name="dataSource" ref="dataSource"/>
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <property name="roleDao" ref="roleDaoRef"/>
     </bean>
 
-    <reference id="dataSource" interface="javax.sql.DataSource" filter="(osgi.jndi.service.name=jdbc/h2ds)"/>
+    <reference id="roleDaoRef" interface="com.nix.dao.RoleDao" />
+    <!--<reference id="dataSource" interface="javax.sql.DataSource" />-->
+
+
 
 
 </blueprint>

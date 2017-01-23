@@ -27,6 +27,27 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.enterprise</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.shell</groupId>
+            <artifactId>org.apache.karaf.shell.console</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
 
 
@@ -42,11 +63,14 @@
                     <manifestLocation>target/META-INF</manifestLocation>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Import-Package>
-                            !com.nix.cxf.restexample,
-                            *
-                        </Import-Package>
-                        <!--<Embed-Dependency>hibernate-core|hibernate-validator;scope=compile</Embed-Dependency>-->
+                        <Import-Package>*</Import-Package>
+                        <Meta-Persistence>
+                            META-INF/persistence.xml
+                        </Meta-Persistence>
+                        <Export-Package>
+                            com.nix.dao.*,
+                            com.nix.model.*
+                        </Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

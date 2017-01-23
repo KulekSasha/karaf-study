@@ -1,14 +1,16 @@
-package com.nix.model;
+package com.nix.dao;
+
+import com.nix.model.User;
 
 import java.util.List;
 
 public interface UserDao {
 
-    long create(User user);
+    void create(User user);
 
     User update(User user);
 
-    long remove(User user);
+    void remove(User user);
 
     List<User> findAll();
 

@@ -2,9 +2,10 @@
 <blueprint default-activation="eager"
            xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
         >
+
     <bean id="dataSourceH2" class="org.h2.jdbcx.JdbcDataSource">
-        <!--<property name="url" value="jdbc:h2:tcp://10.10.34.98/camel"/>-->
-        <property name="url" value="jdbc:h2:tcp://localhost/~/karaf"/>
+        <property name="url" value="jdbc:h2:tcp://10.10.34.98/camel"/>
+        <!--<property name="url" value="jdbc:h2:tcp://localhost/~/karaf"/>-->
         <property name="user" value="sa"/>
         <property name="password" value="123"/>
     </bean>

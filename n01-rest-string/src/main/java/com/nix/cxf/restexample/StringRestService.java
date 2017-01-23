@@ -1,5 +1,7 @@
 package com.nix.cxf.restexample;
 
+import com.nix.model.Role;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,5 +19,5 @@ public interface StringRestService {
     @GET
     @Path("/rest_002")
     @Produces("application/json")
-    public List<String> getString2() throws Exception;
+    public Role getString2() throws Exception;
 }
