@@ -10,35 +10,41 @@
   http://cxf.apache.org/blueprint/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd
   http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
   ">
+
+    <!-- CXF CONFIG -->
     <cxf:bus>
         <cxf:features>
             <cxf:logging/>
         </cxf:features>
     </cxf:bus>
 
-   <!--<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>-->
-
-    <jaxrs:server id="stringRestServer" address="/test_01">
+    <jaxrs:server id="stringRestServer" address="/user-app/rest">
         <jaxrs:serviceBeans>
-            <ref component-id="stringRestServiceBean"/>
+            <ref component-id="userResourceBean"/>
+            <ref component-id="roleResourceBean"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
-            <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+            <ref component-id="jsonProvider"/>
         </jaxrs:providers>
-        <!--<jaxrs:providers>-->
-            <!--<ref bean="jsonProvider"/>-->
-        <!--</jaxrs:providers>-->
     </jaxrs:server>
+    <!-- CXF CONFIG END -->
 
-    <bean id="stringRestServiceBean" class="com.nix.cxf.restexample.StringRestServiceImpl">
-        <!--<property name="dataSource" ref="dataSource"/>-->
+
+    <!-- BEANS -->
+    <bean id="userResourceBean" class="com.nix.rest.impl.UserResourceImpl">
+        <property name="userDao" ref="userDaoRef"/>
+    </bean>
+
+    <bean id="roleResourceBean" class="com.nix.rest.impl.RoleResourceImpl">
         <property name="roleDao" ref="roleDaoRef"/>
     </bean>
 
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+
+
+    <!-- SERVICES FORM OTHER BUNDLES -->
     <reference id="roleDaoRef" interface="com.nix.dao.RoleDao" />
-    <!--<reference id="dataSource" interface="javax.sql.DataSource" />-->
-
-
+    <reference id="userDaoRef" interface="com.nix.dao.UserDao" />
 
 
 </blueprint>

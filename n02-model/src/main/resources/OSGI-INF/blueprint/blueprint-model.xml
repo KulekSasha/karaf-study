@@ -7,6 +7,21 @@
         xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0
         http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+        <command>
+            <action class="com.nix.comand.GetAll">
+                <property name="roleDao" ref="roleDaoImpl"/>
+                <property name="userDao" ref="userDaoImpl"/>
+            </action>
+        </command>
+        <command>
+            <action class="com.nix.comand.FindByLogin">
+                <property name="roleDao" ref="roleDaoImpl"/>
+                <property name="userDao" ref="userDaoImpl"/>
+            </action>
+        </command>
+    </command-bundle>
+
     <bean id="roleDaoImpl" class="com.nix.dao.impl.RoleDaoHibernate">
         <jpa:context unitname="users" property="entityManager"/>
         <tx:transaction method="*" value="Required"/>
@@ -20,13 +35,6 @@
     <service ref="roleDaoImpl" interface="com.nix.dao.RoleDao"/>
     <service ref="userDaoImpl" interface="com.nix.dao.UserDao"/>
 
-    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
-        <command>
-            <action class="com.nix.comand.GetAll">
-                <property name="roleDao" ref="roleDaoImpl"/>
-                <property name="userDao" ref="userDaoImpl"/>
-            </action>
-        </command>
-    </command-bundle>
+
 
 </blueprint>

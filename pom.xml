@@ -5,12 +5,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>karaf-study-parent</artifactId>
     <groupId>com.nix</groupId>
+    <artifactId>user-app</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1</version>
+    <name>user-app</name>
 
     <properties>
+        <base.name>user-app</base.name>
         <java.version>1.8</java.version>
         <apache.cxf.version>3.1.9</apache.cxf.version>
         <validation.api.version>1.1.0.Final</validation.api.version>
@@ -22,21 +24,22 @@
 
 
     <modules>
-        <module>n01-rest-string</module>
+        <module>n00-features</module>
+        <module>n01-datasource</module>
         <module>n02-model</module>
-        <module>n03-datasource</module>
+        <module>n03-rest-service</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.nix</groupId>
-                <artifactId>datasource</artifactId>
+                <artifactId>${base.name}-datasource</artifactId>
                 <version>0.0.1</version>
             </dependency>
             <dependency>
                 <groupId>com.nix</groupId>
-                <artifactId>model</artifactId>
+                <artifactId>${base.name}-model</artifactId>
                 <version>0.0.1</version>
             </dependency>
 
@@ -58,11 +61,6 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate.validator.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>org.hibernate</groupId>-->
-                <!--<artifactId>hibernate-validator-osgi-karaf-features</artifactId>-->
-                <!--<version>${hibernate.version}</version>-->
-            <!--</dependency>-->
 
             <!--ORM Hibernate-->
             <dependency>
@@ -81,10 +79,18 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-                <scope>compile</scope>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <defaultGoal>install</defaultGoal>

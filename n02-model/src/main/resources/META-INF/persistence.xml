@@ -3,11 +3,12 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              version="1.0">
     <persistence-unit name="users" transaction-type="JTA">
+
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
         <jta-data-source>
             osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/h2ds)
         </jta-data-source>
-
 
         <class>com.nix.model.Role</class>
         <class>com.nix.model.User</class>

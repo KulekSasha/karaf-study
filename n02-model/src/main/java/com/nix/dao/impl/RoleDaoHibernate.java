@@ -3,12 +3,17 @@ package com.nix.dao.impl;
 import com.nix.dao.RoleDao;
 import com.nix.model.Role;
 import com.nix.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 public class RoleDaoHibernate implements RoleDao {
 
+    private static final Logger log = LoggerFactory.getLogger(RoleDaoHibernate.class);
+
+    private static final String FIND_ALL_QUERY = "select r from Role r";
     private static final String FIND_BY_NAME_QUERY = "select r from Role r where lower(r.name)=:name";
 
     private EntityManager entityManager;
@@ -37,6 +42,13 @@ public class RoleDaoHibernate implements RoleDao {
             entityManager.remove(persistedRole);
             entityManager.flush();
         }
+    }
+
+    @Override
+    public List<Role> findAll() {
+        log.debug("invoke findAll");
+        return entityManager.createQuery(FIND_ALL_QUERY, Role.class)
+                .getResultList();
     }
 
     @Override
