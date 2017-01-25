@@ -56,6 +56,11 @@ public class UserDaoHibernate implements UserDao {
 
     @Override
     public User findByLogin(String login) {
+
+        if (login == null) {
+            return null;
+        }
+
         log.debug("invoke findByLogin with param: {}", login);
         List<User> users = entityManager.createQuery(FIND_BY_LOGIN_QUERY, User.class)
                 .setParameter("login", login.toLowerCase())
@@ -69,6 +74,11 @@ public class UserDaoHibernate implements UserDao {
 
     @Override
     public User findByEmail(String email) {
+
+        if (email == null) {
+            return null;
+        }
+
         log.debug("invoke findByEmail with param: {}", email);
         List<User> users = entityManager.createQuery(FIND_BY_EMAIL_QUERY, User.class)
                 .setParameter("email", email.toLowerCase())

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
@@ -21,8 +22,7 @@ public class Role {
     private long id;
 
     @Column(name = "NAME")
-//    @NaturalId
-//    @NotEmpty
+    @NotEmpty
     private String name;
 
 }

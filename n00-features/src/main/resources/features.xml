@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="user-app-${pom.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.4.0 http://karaf.apache.org/xmlns/features/v1.4.0">
+
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.9/xml/features</repository>
+    <repository>mvn:org.ops4j.pax.jdbc/pax-jdbc-features/0.8.0/xml/features</repository>
+    <repository>mvn:org.hibernate/hibernate-osgi/5.2.4.Final/xml/karaf</repository>
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.9/xml/features</repository>
+    <repository>
+        mvn:org.hibernate/hibernate-validator-osgi-karaf-features/5.3.0.Final/xml/features
+    </repository>
+    <repository>mvn:org.apache.karaf.features/enterprise/4.0.8/xml/features</repository>
+
+    <feature name="user-app-install-all" version="${pom.version}">
+        <feature>user-app-datasource</feature>
+    </feature>
+
+    <feature name="user-app-datasource" version="${pom.version}">
+        <feature>pax-jdbc-h2</feature>
+        <feature>pax-jdbc-config</feature>
+        <bundle start-level="20">mvn:com.h2database/h2/1.4.193</bundle>
+        <!--<bundle start-level="30">-->
+            <!--mvn:${groupId}/${parent.artifactId}-datasource/${pom.version}-->
+        <!--</bundle>-->
+    </feature>
+
+    <!--jpa/[1.0.4,1.0.4]-->
+
+    <feature name="user-app-model" version="${pom.version}">
+        <feature prerequisite="true" dependency="false">transaction</feature>
+        <feature prerequisite="true" dependency="false" version="[1.0.4,1.0.4]">jpa</feature>
+        <feature prerequisite="true" dependency="false">hibernate</feature>
+        <feature prerequisite="true" version="[5.2.4.Final,5.2.4.Final]">hibernate-orm</feature>
+        <feature prerequisite="true" version="[5.3.0.Final,5.3.0.Final]">hibernate-validator</feature>
+        <feature prerequisite="true">jndi</feature>
+        <feature prerequisite="true">jdbc</feature>
+
+        <!--<bundle>mvn:${groupId}/${parent.artifactId}-model/${pom.version}</bundle>-->
+    </feature>
+
+    <feature name="user-app-rest-api" version="${pom.version}">
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/2.8.6</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-core/2.8.6</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.8.6</bundle>
+        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.8.6</bundle>
+        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.8.6</bundle>
+        <!--<bundle>mvn:${groupId}/${parent.artifactId}-api-rest/${pom.version}</bundle>-->
+    </feature>
+
+</features>
