@@ -2,7 +2,6 @@ package com.nix.dao.impl;
 
 import com.nix.dao.RoleDao;
 import com.nix.model.Role;
-import com.nix.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

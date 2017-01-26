@@ -28,25 +28,37 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
         <!--<dependency>-->
-            <!--<groupId>org.hibernate.javax.persistence</groupId>-->
-            <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
-            <!--<version>1.0.0.Final</version>-->
+        <!--<groupId>org.hibernate.javax.persistence</groupId>-->
+        <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
+        <!--<version>1.0.0.Final</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.osgi</groupId>-->
-            <!--<artifactId>org.osgi.core</artifactId>-->
-            <!--<version>4.3.1</version>-->
+        <!--<groupId>org.osgi</groupId>-->
+        <!--<artifactId>org.osgi.core</artifactId>-->
+        <!--<version>4.3.1</version>-->
         <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.osgi</groupId>-->
-            <!--<artifactId>org.osgi.enterprise</artifactId>-->
-            <!--<version>4.2.0</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.enterprise</artifactId>
+            <version>4.2.0</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.karaf.shell</groupId>
             <artifactId>org.apache.karaf.shell.console</artifactId>
             <version>2.3.0</version>
+        </dependency>
+        <dependency>
+
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+            <version>3.2.0</version>
         </dependency>
     </dependencies>
 
@@ -59,11 +71,16 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
+                <!--<version>3.0.0</version>-->
                 <configuration>
                     <manifestLocation>target/META-INF</manifestLocation>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Import-Package>*</Import-Package>
+                        <Import-Package>
+                            org.hibernate.jpa,
+                            org.hibernate,
+                            *
+                        </Import-Package>
                         <Meta-Persistence>
                             META-INF/persistence.xml
                         </Meta-Persistence>
@@ -71,7 +88,28 @@
                             com.nix.dao.*,
                             com.nix.model.*
                         </Export-Package>
+                        <_noee>true</_noee>
+
+                        <_runrequires>false</_runrequires>>
+                        <jpa-implementation>false</jpa-implementation>
                     </instructions>
+                </configuration>
+
+            </plugin>
+
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
+                <version>2.4.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bnd-process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+
                 </configuration>
             </plugin>
         </plugins>
