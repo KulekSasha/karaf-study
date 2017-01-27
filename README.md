@@ -1,6 +1,7 @@
 #Simple osgi application.
 
 For app installation follow next steps:
+
  1. clone this repository;
  2. run `mvn clean install`;
  3. download Apache Karaf v4.0.8 from https://karaf.apache.org/download.html;
