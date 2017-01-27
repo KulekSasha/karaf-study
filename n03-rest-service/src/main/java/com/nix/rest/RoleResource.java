@@ -1,7 +1,6 @@
 package com.nix.rest;
 
 import com.nix.model.Role;
-import com.nix.model.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

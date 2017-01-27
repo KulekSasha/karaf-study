@@ -18,6 +18,7 @@ public class UserResourceImpl implements UserResource {
     private static final Logger log = LoggerFactory.getLogger(UserResourceImpl.class);
 
     private UserDao userDao;
+
     private Validator validator;
 
     @Context
@@ -61,7 +62,7 @@ public class UserResourceImpl implements UserResource {
 
         MultivaluedMap<String, String> errors = hibernateValidation(newUser);
 
-        if (userDao.findByLogin(newUser.getLogin()) != null) {
+        if (newUser != null && userDao.findByLogin(newUser.getLogin()) != null) {
             errors.add("login", "non.unique.login");
         }
 
@@ -90,10 +91,6 @@ public class UserResourceImpl implements UserResource {
     @Override
     public Response updateUser(User updatedUser, String login) {
         log.debug("update user, incoming user: {}", updatedUser);
-
-        if (updatedUser == null) {
-            updatedUser = new User();
-        }
 
         User currentUser = userDao.findByLogin(login);
 
@@ -146,6 +143,10 @@ public class UserResourceImpl implements UserResource {
     }
 
     private MultivaluedMap<String, String> hibernateValidation(User user) {
+
+        if (user == null) {
+            user = new User();
+        }
 
         Set<ConstraintViolation<User>> validationErrors = validator.validate(user);
         MultivaluedMap<String, String> errorsMap = new MultivaluedHashMap<>();

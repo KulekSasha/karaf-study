@@ -7,11 +7,6 @@
         xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0
         http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
-    <!--xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"-->
-
-
-
-
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
         <command>
             <action class="com.nix.comand.GetAll">
@@ -39,7 +34,5 @@
 
     <service ref="roleDaoImpl" interface="com.nix.dao.RoleDao"/>
     <service ref="userDaoImpl" interface="com.nix.dao.UserDao"/>
-
-
 
 </blueprint>

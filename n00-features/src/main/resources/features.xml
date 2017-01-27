@@ -8,54 +8,57 @@
     <repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.9/xml/features</repository>
     <repository>mvn:org.ops4j.pax.jdbc/pax-jdbc-features/0.8.0/xml/features</repository>
     <repository>mvn:org.hibernate/hibernate-osgi/5.2.4.Final/xml/karaf</repository>
-    <repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.9/xml/features</repository>
     <repository>
         mvn:org.hibernate/hibernate-validator-osgi-karaf-features/5.3.0.Final/xml/features
     </repository>
-    <repository>mvn:org.apache.karaf.features/enterprise/4.0.8/xml/features</repository>
-    <repository>mvn:org.apache.aries.jpa/jpa-features/2.5.0/xml/features</repository>
-
+    <repository>mvn:org.apache.felix/org.apache.felix.ipojo.features/1.12.1/xml</repository>
 
     <!-- ====== FEATURES ======= -->
     <feature name="user-app-install-all" version="${pom.version}">
-        <feature>user-app-datasource</feature>
+        <feature prerequisite="true">cxf</feature>
+        <feature prerequisite="true">webconsole</feature>
+        <feature prerequisite="true">user-app-datasource</feature>
+        <feature prerequisite="true">user-app-model</feature>
+        <feature prerequisite="true">user-app-validator-hibernate</feature>
+        <feature>user-app-api-rest</feature>
     </feature>
 
     <feature name="user-app-datasource" version="${pom.version}">
         <feature>pax-jdbc-h2</feature>
         <feature>pax-jdbc-config</feature>
         <bundle start-level="20">mvn:com.h2database/h2/1.4.193</bundle>
+        <bundle start-level="20">mvn:com.zaxxer/HikariCP/2.5.1</bundle>
         <bundle start-level="30">
             mvn:${groupId}/${parent.artifactId}-datasource/${pom.version}
         </bundle>
     </feature>
 
-    <!--bundle:install -s mvn:com.nix/user-app-model/0.0.1-->
-
     <feature name="user-app-model" version="${pom.version}">
-        <feature                   prerequisite="true">transaction</feature>
+        <feature prerequisite="true">transaction</feature>
         <feature version="[1.0.4,1.0.4]" prerequisite="true">jpa</feature>
-        <!--<feature version="[2.3.0,2.3.0]" prerequisite="true">jpa</feature>-->
-        <feature                   prerequisite="true">hibernate</feature>
+        <feature prerequisite="true">hibernate</feature>
         <feature version="[5.2,6)" prerequisite="true">hibernate-orm</feature>
         <feature version="[5.3,6)" prerequisite="true">hibernate-validator</feature>
         <feature prerequisite="true">jndi</feature>
         <feature prerequisite="true">jdbc</feature>
-        <bundle >mvn:${groupId}/${parent.artifactId}-model/${pom.version}</bundle>
-        <!--<feature>model-bundle</feature>-->
-    </feature>
-
-    <feature name="model-bundle" version="${pom.version}">
         <bundle>mvn:${groupId}/${parent.artifactId}-model/${pom.version}</bundle>
     </feature>
 
-    <feature name="user-app-rest-api" version="${pom.version}">
-        <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/2.8.6</bundle>
-        <bundle>mvn:com.fasterxml.jackson.core/jackson-core/2.8.6</bundle>
-        <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.8.6</bundle>
-        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.8.6</bundle>
-        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.8.6</bundle>
-        <!--<bundle>mvn:${groupId}/${parent.artifactId}-api-rest/${pom.version}</bundle>-->
+    <feature name="user-app-api-rest" version="${pom.version}">
+        <feature prerequisite="true">cxf</feature>
+        <bundle start-level="10">mvn:com.fasterxml.jackson.core/jackson-annotations/2.8.6</bundle>
+        <bundle start-level="10">mvn:com.fasterxml.jackson.core/jackson-core/2.8.6</bundle>
+        <bundle start-level="10">mvn:com.fasterxml.jackson.core/jackson-databind/2.8.6</bundle>
+        <bundle start-level="10">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.8.6</bundle>
+        <bundle start-level="10">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.8.6
+        </bundle>
+        <bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-rest/${pom.version}
+        </bundle>
+    </feature>
+
+    <feature name="user-app-validator-hibernate" version="${pom.version}">
+        <feature prerequisite="true">ipojo-all</feature>
+        <bundle>mvn:${groupId}/${parent.artifactId}-validator-hib/${pom.version}</bundle>
     </feature>
 
 </features>

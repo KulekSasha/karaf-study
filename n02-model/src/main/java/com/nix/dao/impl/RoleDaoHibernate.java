@@ -52,6 +52,7 @@ public class RoleDaoHibernate implements RoleDao {
 
     @Override
     public Role findByName(String name) {
+        log.debug("invoke findByName");
         List<Role> roles = entityManager.createQuery(FIND_BY_NAME_QUERY, Role.class)
                 .setParameter("name", name)
                 .getResultList();

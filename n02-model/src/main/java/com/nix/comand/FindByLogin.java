@@ -14,25 +14,17 @@ public class FindByLogin implements Action {
     private UserDao userDao;
 
     public void setRoleDao(RoleDao roleDao) {
-        if (roleDao == null) {
-            System.out.println("roleDao is null");
-        }
         this.roleDao = roleDao;
     }
 
     public void setUserDao(UserDao userDao) {
-        if (userDao ==null){
-            System.out.println("userDao is null");
-        }
         this.userDao = userDao;
     }
 
     @Override
     public Object execute(CommandSession commandSession) throws Exception {
-
         System.out.println("find by login: testUser_4");
         System.out.println(userDao.findByLogin("testUser_4"));
-
         return null;
     }
 }

@@ -18,16 +18,10 @@ public class GetAll implements Action {
     private UserDao userDao;
 
     public void setRoleDao(RoleDao roleDao) {
-        if (roleDao == null) {
-            System.out.println("roleDao is null");
-        }
         this.roleDao = roleDao;
     }
 
     public void setUserDao(UserDao userDao) {
-        if (userDao ==null){
-            System.out.println("userDao is null");
-        }
         this.userDao = userDao;
     }
 
@@ -40,13 +34,13 @@ public class GetAll implements Action {
             System.out.println("role with id 1: " + role);
         }
 
+        System.out.println("All users:");
         List<User> users = userDao.findAll();
-
-        if (users != null){
+        if (users != null) {
             users.forEach(System.out::println);
         }
 
-        System.out.println("find by login:");
+        System.out.println("\nfind by login - testUser_4:");
         System.out.println(userDao.findByLogin("testUser_4"));
 
         return null;

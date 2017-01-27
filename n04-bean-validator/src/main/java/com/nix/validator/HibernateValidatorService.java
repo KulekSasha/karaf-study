@@ -1,6 +1,9 @@
 package com.nix.validator;
 
-import org.apache.felix.ipojo.annotations.*;
+import org.apache.felix.ipojo.annotations.Component;
+import org.apache.felix.ipojo.annotations.Instantiate;
+import org.apache.felix.ipojo.annotations.Invalidate;
+import org.apache.felix.ipojo.annotations.Validate;
 import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.HibernateValidatorConfiguration;
 import org.osgi.framework.BundleContext;
@@ -21,8 +24,6 @@ public class HibernateValidatorService {
     private ServiceRegistration<Validator> registration;
     private ServiceRegistration<ValidatorFactory> factoryRegistration;
 
-//    @Requires
-//    ConstraintMessageInterpolator interpolator;
 
 
 

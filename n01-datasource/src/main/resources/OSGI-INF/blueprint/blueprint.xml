@@ -1,16 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint default-activation="eager"
            xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-        >
+>
 
+    <!--datasource wo connection pool-->
     <bean id="dataSourceH2" class="org.h2.jdbcx.JdbcDataSource">
-        <property name="url" value="jdbc:h2:tcp://10.10.34.98/camel"/>
-        <!--<property name="url" value="jdbc:h2:tcp://localhost/~/karaf"/>-->
+        <property name="url"
+                  value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;INIT=
+                  DROP TABLE IF EXISTS PERSON\;
+                  DROP TABLE IF EXISTS PERSON_ROLE\;
+                  create table PERSON_ROLE
+                    (ROLE_ID identity NOT NULL,
+                    NAME varchar(50) NOT NULL,
+
+                    PRIMARY KEY (ROLE_ID))\;
+
+                  create table PERSON
+                    (PERSON_ID identity NOT NULL,
+                    ROLE_ID bigint NOT NULL,
+                    LOGIN varchar(50) NOT NULL,
+                    PASSWORD varchar(50) NOT NULL,
+                    EMAIL varchar(50),
+                    FIRST_NAME varchar(50) NOT NULL,
+                    LAST_NAME varchar(50) NOT NULL,
+                    BIRTHDAY date NOT NULL,
+
+                    FOREIGN KEY (ROLE_ID) REFERENCES public.PERSON_ROLE(ROLE_ID),
+                    PRIMARY KEY (PERSON_ID),
+                    UNIQUE KEY user_login_UNIQUE (LOGIN))\;
+
+                    INSERT INTO PERSON_ROLE VALUES
+                        (1, 'Admin'),
+                        (2, 'User')\;
+
+                    INSERT INTO PERSON VALUES
+                        (1,1,'testUser_1','testUser_1','testUser_1@gmail.com','Ivan','Ivanov','1986-01-01'),
+                        (2,1,'testUser_2','testUser_2','testUser_2@gmail.com','Petr','Petrov','1985-02-02'),
+                        (3,2,'testUser_3','testUser_3','testUser_3@gmail.com','Dmitrii','Dmitriev','1984-03-03'),
+                        (4,2,'testUser_4','testUser_4','testUser_4@gmail.com','Stas','Mikhailov','1990-04-04'),
+                        (5,2,'testUser_5','testUser_5','testUser_5@gmail.com','Oleg','Gazmanov','1980-05-05')\;"
+        />
+        <!--<property name="url" value="jdbc:h2:tcp://10.10.34.98/camel"/>-->
+
         <property name="user" value="sa"/>
         <property name="password" value="123"/>
     </bean>
 
-    <service id="serviceh2ds" ref="dataSourceH2" interface="javax.sql.DataSource">
+
+    <!-- HikariCP configuration -->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="poolName" value="springHikariCP" />
+        <property name="connectionTestQuery" value="SELECT 1" />
+        <property name="dataSourceClassName" value="org.h2.jdbcx.JdbcDataSource" />
+        <property name="maximumPoolSize" value="3" />
+        <property name="idleTimeout" value="3000" />
+
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;INIT=
+                  DROP TABLE IF EXISTS PERSON\;
+                  DROP TABLE IF EXISTS PERSON_ROLE\;
+                  create table PERSON_ROLE
+                    (ROLE_ID identity NOT NULL,
+                    NAME varchar(50) NOT NULL,
+
+                    PRIMARY KEY (ROLE_ID))\;
+
+                  create table PERSON
+                    (PERSON_ID identity NOT NULL,
+                    ROLE_ID bigint NOT NULL,
+                    LOGIN varchar(50) NOT NULL,
+                    PASSWORD varchar(50) NOT NULL,
+                    EMAIL varchar(50),
+                    FIRST_NAME varchar(50) NOT NULL,
+                    LAST_NAME varchar(50) NOT NULL,
+                    BIRTHDAY date NOT NULL,
+
+                    FOREIGN KEY (ROLE_ID) REFERENCES public.PERSON_ROLE(ROLE_ID),
+                    PRIMARY KEY (PERSON_ID),
+                    UNIQUE KEY user_login_UNIQUE (LOGIN))\;
+
+                    INSERT INTO PERSON_ROLE VALUES
+                        (1, 'Admin'),
+                        (2, 'User')\;
+
+                    INSERT INTO PERSON VALUES
+                        (1,1,'testUser_1','testUser_1','testUser_1@gmail.com','Ivan','Ivanov','1986-01-01'),
+                        (2,1,'testUser_2','testUser_2','testUser_2@gmail.com','Petr','Petrov','1985-02-02'),
+                        (3,2,'testUser_3','testUser_3','testUser_3@gmail.com','Dmitrii','Dmitriev','1984-03-03'),
+                        (4,2,'testUser_4','testUser_4','testUser_4@gmail.com','Stas','Mikhailov','1990-04-04'),
+                        (5,2,'testUser_5','testUser_5','testUser_5@gmail.com','Oleg','Gazmanov','1980-05-05')\;">${dataSource.url}</prop>
+                <prop key="user">sa</prop>
+                <prop key="password">123</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- HikariCP datasource -->
+    <bean id="dataSourceHikari" class="com.zaxxer.hikari.HikariDataSource">
+        <argument ref="hikariConfig" />
+    </bean>
+
+    <service id="serviceh2ds" ref="dataSourceHikari" interface="javax.sql.DataSource">
         <service-properties>
             <entry key="osgi.jndi.service.name" value="jdbc/h2ds"/>
         </service-properties>

@@ -10,20 +10,21 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>${parent.artifactId}-datasource</artifactId>
+    <artifactId>user-app-datasource</artifactId>
     <packaging>bundle</packaging>
-    <version>0.0.1</version>
-
 
     <dependencies>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
-        <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -35,14 +36,6 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Import-Package>*</Import-Package>
                     </instructions>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.karaf.tooling</groupId>
-                <artifactId>karaf-maven-plugin</artifactId>
-                <configuration>
-                    
                 </configuration>
             </plugin>
         </plugins>
