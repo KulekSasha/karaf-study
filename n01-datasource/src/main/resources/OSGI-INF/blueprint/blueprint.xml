@@ -89,7 +89,7 @@
                         (2,1,'testUser_2','testUser_2','testUser_2@gmail.com','Petr','Petrov','1985-02-02'),
                         (3,2,'testUser_3','testUser_3','testUser_3@gmail.com','Dmitrii','Dmitriev','1984-03-03'),
                         (4,2,'testUser_4','testUser_4','testUser_4@gmail.com','Stas','Mikhailov','1990-04-04'),
-                        (5,2,'testUser_5','testUser_5','testUser_5@gmail.com','Oleg','Gazmanov','1980-05-05')\;">${dataSource.url}</prop>
+                        (5,2,'testUser_5','testUser_5','testUser_5@gmail.com','Oleg','Gazmanov','1980-05-05')\;"/>
                 <prop key="user">sa</prop>
                 <prop key="password">123</prop>
             </props>
