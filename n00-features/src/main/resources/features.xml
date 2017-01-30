@@ -15,6 +15,7 @@
 
     <!-- ====== FEATURES ======= -->
     <feature name="user-app-install-all" version="${pom.version}">
+        <feature prerequisite="true">wrap</feature>
         <feature prerequisite="true">cxf</feature>
         <feature prerequisite="true">webconsole</feature>
         <feature prerequisite="true">user-app-datasource</feature>
@@ -24,6 +25,7 @@
     </feature>
 
     <feature name="user-app-datasource" version="${pom.version}">
+        <feature prerequisite="true">wrap</feature>
         <feature>pax-jdbc-h2</feature>
         <feature>pax-jdbc-config</feature>
         <bundle start-level="20">mvn:com.h2database/h2/1.4.193</bundle>
@@ -34,6 +36,7 @@
     </feature>
 
     <feature name="user-app-model" version="${pom.version}">
+        <feature prerequisite="true">wrap</feature>
         <feature prerequisite="true">transaction</feature>
         <feature version="[1.0.4,1.0.4]" prerequisite="true">jpa</feature>
         <feature prerequisite="true">hibernate</feature>

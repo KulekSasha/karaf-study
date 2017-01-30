@@ -1,9 +1,6 @@
 package com.nix.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -20,6 +17,7 @@ import java.util.Date;
 @EqualsAndHashCode(exclude = {"id"})
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 @Entity
 @Table(name = "PERSON", schema = "PUBLIC")
