@@ -18,7 +18,6 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.8.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -28,7 +27,6 @@
         <dependency>
             <groupId>com.nix</groupId>
             <artifactId>user-app-api-rest</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -37,12 +35,11 @@
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-client</artifactId>
-            <version>${apache.cxf.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!--Tests-->
@@ -54,11 +51,6 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-client</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!--Pax Exam-->
@@ -120,33 +112,10 @@
 
         <!-- framework to test with -->
         <dependency>
-            <groupId>org.apache.karaf.features</groupId>
-            <artifactId>standard</artifactId>
-            <type>xml</type>
-            <classifier>features</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.karaf.features</groupId>
-            <artifactId>org.apache.karaf.features.core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.karaf.system</groupId>
-            <artifactId>org.apache.karaf.system.core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.karaf</groupId>
             <artifactId>apache-karaf</artifactId>
             <type>zip</type>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.karaf.shell</groupId>
-                    <artifactId>org.apache.karaf.shell.dev</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
     </dependencies>

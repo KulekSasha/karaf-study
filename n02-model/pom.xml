@@ -56,12 +56,16 @@
                         </Meta-Persistence>
                         <Export-Package>
                             com.nix.dao.*,
-                            com.nix.model.*
+                            com.nix.model.*,
+                            com.nix.command.*
                         </Export-Package>
                         <DynamicImport-Package>
                             org.hibernate.proxy,
                             javassist.util.proxy
                         </DynamicImport-Package>
+                        <Karaf-Commands>
+                            *
+                        </Karaf-Commands>
                     </instructions>
                 </configuration>
             </plugin>

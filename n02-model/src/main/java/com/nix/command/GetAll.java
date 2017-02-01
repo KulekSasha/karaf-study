@@ -1,20 +1,24 @@
-package com.nix.comand;
+package com.nix.command;
 
 import com.nix.dao.RoleDao;
 import com.nix.dao.UserDao;
 import com.nix.model.Role;
 import com.nix.model.User;
-import org.apache.felix.gogo.commands.Action;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.service.command.CommandSession;
+import org.apache.karaf.shell.api.action.Action;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
 
 import java.util.List;
 
 @Command(scope = "user-app", name = "get-all")
+@Service
 public class GetAll implements Action {
 
+    @Reference
     private RoleDao roleDao;
 
+    @Reference
     private UserDao userDao;
 
     public void setRoleDao(RoleDao roleDao) {
@@ -26,7 +30,7 @@ public class GetAll implements Action {
     }
 
     @Override
-    public Object execute(CommandSession commandSession) throws Exception {
+    public Object execute() throws Exception {
 
         Role role = roleDao.findById(1L);
 

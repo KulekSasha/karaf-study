@@ -36,7 +36,7 @@
         <karaf.version>4.0.8</karaf.version>
         <hikaricp.version>2.5.1</hikaricp.version>
         <slf4j-api.version>1.7.21</slf4j-api.version>
-        <karaf.shell.console.version>2.3.0</karaf.shell.console.version>
+        <!--<karaf.shell.console.version>2.3.0</karaf.shell.console.version>-->
         <jackson.version>2.8.6</jackson.version>
         <ipojo.annotations.version>1.12.1</ipojo.annotations.version>
         <osgi.core.version>5.0.0</osgi.core.version>
@@ -45,6 +45,7 @@
         <pax-url.version>2.5.2</pax-url.version>
         <pax-exam-testforge.version>3.6.0</pax-exam-testforge.version>
         <hamcrest-all.version>1.3</hamcrest-all.version>
+        <javax.inject.version>1</javax.inject.version>
         <!--dependencies end-->
 
         <!--bundle versions-->
@@ -77,14 +78,25 @@
                 <version>${app.model.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.nix</groupId>
+                <artifactId>${base.name}-api-rest</artifactId>
+                <version>${app.model.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.karaf.shell</groupId>
                 <artifactId>org.apache.karaf.shell.console</artifactId>
-                <version>${karaf.shell.console.version}</version>
+                <version>${karaf.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.core</artifactId>
                 <version>${osgi.core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax.inject.version}</version>
             </dependency>
 
             <!--CXF-->
@@ -97,7 +109,7 @@
             <!--Jackson-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
+                <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
             <dependency>
@@ -123,6 +135,12 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate.validator.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.fasterxml</groupId>
+                        <artifactId>classmate</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!--BD and ORM Hibernate-->
@@ -207,6 +225,20 @@
                 <groupId>org.ops4j.pax.exam</groupId>
                 <artifactId>pax-exam-link-mvn</artifactId>
                 <version>${pax-exam.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.ops4j.base</groupId>
+                        <artifactId>ops4j-base-lang</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.ops4j.base</groupId>
+                        <artifactId>ops4j-base-util-property</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.ops4j.pax.url</groupId>
+                        <artifactId>pax-url-commons</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -259,6 +291,16 @@
                 <artifactId>apache-karaf</artifactId>
                 <version>${karaf.version}</version>
                 <type>zip</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.karaf.shell</groupId>
+                        <artifactId>org.apache.karaf.shell.dev</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jline</groupId>
+                        <artifactId>jline</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -314,6 +356,22 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+            </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
 </project>
