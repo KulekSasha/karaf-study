@@ -1,0 +1,41 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:jaxws="http://cxf.apache.org/blueprint/jaxws"
+           xmlns:cxf="http://cxf.apache.org/blueprint/core"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+    <!--CXF CONFIG-->
+    <jaxws:endpoint id="userResourceService"
+                    endpointName="users"
+                    implementor="#userResourceSoap"
+                    implementorClass="com.nix.soap.impl.UserResourceSoapImpl"
+                    address="/soap/users"
+
+    />
+
+    <jaxws:endpoint id="roleResourceService"
+                    endpointName="roles"
+                    implementor="#roleResourceSoap"
+                    implementorClass="com.nix.soap.impl.RoleResourceSoapImpl"
+                    address="/soap/roles"
+    />
+    <!-- CXF CONFIG END -->
+
+
+    <!-- BEANS -->
+    <bean id="roleResourceSoap" class="com.nix.soap.impl.RoleResourceSoapImpl">
+        <property name="roleDao" ref="roleDaoRef"/>
+    </bean>
+
+    <bean id="userResourceSoap" class="com.nix.soap.impl.UserResourceSoapImpl">
+        <property name="userDao" ref="userDaoRef"/>
+        <property name="validator" ref="validator"/>
+    </bean>
+
+    <!-- SERVICES FORM OTHER BUNDLES -->
+    <reference id="roleDaoRef" interface="com.nix.dao.RoleDao"/>
+    <reference id="userDaoRef" interface="com.nix.dao.UserDao"/>
+    <reference id="validator" interface="javax.validation.Validator" availability="optional"/>
+
+
+</blueprint>

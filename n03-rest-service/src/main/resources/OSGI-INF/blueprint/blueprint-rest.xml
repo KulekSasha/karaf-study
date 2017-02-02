@@ -8,13 +8,13 @@
   http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
 
     <!-- CXF CONFIG -->
-    <cxf:bus>
+    <cxf:bus id="mainBus">
         <cxf:features>
             <cxf:logging/>
         </cxf:features>
     </cxf:bus>
 
-    <jaxrs:server id="stringRestServer" address="/user-app/rest">
+    <jaxrs:server id="restServer" address="/user-app/rest">
         <jaxrs:serviceBeans>
             <ref component-id="userResourceBean"/>
             <ref component-id="roleResourceBean"/>

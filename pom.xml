@@ -16,6 +16,7 @@
         <module>n01-datasource</module>
         <module>n02-model</module>
         <module>n03-rest-service</module>
+        <module>n03-soap-service</module>
         <module>n04-bean-validator</module>
         <module>n05-integration-tests</module>
     </modules>
