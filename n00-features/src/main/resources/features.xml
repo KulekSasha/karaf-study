@@ -21,7 +21,7 @@
         <feature prerequisite="true">user-app-datasource</feature>
         <feature prerequisite="true">user-app-model</feature>
         <feature prerequisite="true">user-app-validator-hibernate</feature>
-        <feature>user-app-api-rest</feature>
+        <feature>user-app-api</feature>
     </feature>
 
     <feature name="user-app-datasource" version="${pom.version}">
@@ -47,7 +47,7 @@
         <bundle>mvn:${groupId}/${parent.artifactId}-model/${pom.version}</bundle>
     </feature>
 
-    <feature name="user-app-api-rest" version="${pom.version}">
+    <feature name="user-app-api" version="${pom.version}">
         <feature prerequisite="true">cxf</feature>
         <bundle start-level="10">mvn:com.fasterxml.jackson.core/jackson-annotations/2.8.6</bundle>
         <bundle start-level="10">mvn:com.fasterxml.jackson.core/jackson-core/2.8.6</bundle>
@@ -55,8 +55,8 @@
         <bundle start-level="10">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.8.6</bundle>
         <bundle start-level="10">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.8.6
         </bundle>
-        <bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-rest/${pom.version}
-        </bundle>
+        <bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-rest/${pom.version}</bundle>
+        <bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-soap/${pom.version}</bundle>
     </feature>
 
     <feature name="user-app-validator-hibernate" version="${pom.version}">
