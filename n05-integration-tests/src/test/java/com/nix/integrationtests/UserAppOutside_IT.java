@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import static com.nix.integrationtests.KarafBaseConfig.getConfiguration;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.junit.Assert.assertEquals;
@@ -48,7 +49,7 @@ public class UserAppOutside_IT {
     @BeforeClass
     public static void startKaraf() throws Exception {
         ExamSystem system = PaxExamRuntime
-                .createServerSystem(KarafBaseConfig.getConfiguration());
+                .createServerSystem(getConfiguration());
         container = PaxExamRuntime.createContainer(system);
         container.start();
         waitForWADL();

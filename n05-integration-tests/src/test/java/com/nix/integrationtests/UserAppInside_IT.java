@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.nix.integrationtests.KarafBaseConfig.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -44,7 +45,7 @@ public class UserAppInside_IT {
 
     @Configuration
     public static Option[] configuration() throws Exception {
-        return KarafBaseConfig.getConfiguration();
+        return getConfiguration();
     }
 
     @Test

@@ -23,11 +23,14 @@ public interface KarafBaseConfig {
                         .unpackDirectory(new File("target/integration-tests/karaf/"))
                         .useDeployFolder(false),
 
+//                editConfigurationFilePut("etc/org.ops4j.pax.web.cfg",
+//                        "org.osgi.service.http.port", "8181"),
+
 //                keepRuntimeFolder(),
 
                 configureConsole().ignoreRemoteShell(),
 
-                logLevel(LogLevelOption.LogLevel.WARN),
+                logLevel(LogLevelOption.LogLevel.DEBUG),
 
                 junitBundles(),
 
