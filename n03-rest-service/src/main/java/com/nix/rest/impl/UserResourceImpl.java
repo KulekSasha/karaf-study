@@ -18,24 +18,12 @@ public class UserResourceImpl implements UserResource {
     private static final Logger log = LoggerFactory.getLogger(UserResourceImpl.class);
 
     private UserDao userDao;
-
     private Validator validator;
+    @Context private UriInfo uriInfo;
 
-    @Context
-    private UriInfo uriInfo;
-
-    public void setUserDao(UserDao userDao) {
-        log.debug("set up userDao");
+    public UserResourceImpl(UserDao userDao, Validator validator) {
         this.userDao = userDao;
-    }
-
-    public void setValidator(Validator validator) {
         this.validator = validator;
-    }
-
-    public void setUriInfo(UriInfo uriInfo) {
-        log.debug("set up uriInfo");
-        this.uriInfo = uriInfo;
     }
 
     @Override

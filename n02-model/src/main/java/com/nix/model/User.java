@@ -46,7 +46,6 @@ public class User {
     @NotEmpty
     private String email;
 
-
     @Column(name = "FIRST_NAME")
     @Length(min = 2, max = 25, message = "{user.firstName.length}")
     @NotEmpty

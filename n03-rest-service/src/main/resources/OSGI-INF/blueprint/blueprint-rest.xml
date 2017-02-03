@@ -8,7 +8,7 @@
   http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
 
     <!-- CXF CONFIG -->
-    <cxf:bus id="mainBus">
+    <cxf:bus>
         <cxf:features>
             <cxf:logging/>
         </cxf:features>
@@ -28,21 +28,20 @@
 
     <!-- BEANS -->
     <bean id="userResourceBean" class="com.nix.rest.impl.UserResourceImpl">
-        <property name="userDao" ref="userDaoRef"/>
-        <property name="validator" ref="validator"/>
+        <argument ref="userDaoRef"/>
+        <argument ref="validator"/>
     </bean>
 
     <bean id="roleResourceBean" class="com.nix.rest.impl.RoleResourceImpl">
-        <property name="roleDao" ref="roleDaoRef"/>
+        <argument ref="roleDaoRef"/>
     </bean>
 
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
 
 
     <!-- SERVICES FORM OTHER BUNDLES -->
-    <reference id="roleDaoRef" interface="com.nix.dao.RoleDao" />
-    <reference id="userDaoRef" interface="com.nix.dao.UserDao" />
+    <reference id="roleDaoRef" interface="com.nix.dao.RoleDao"/>
+    <reference id="userDaoRef" interface="com.nix.dao.UserDao"/>
     <reference id="validator" interface="javax.validation.Validator" availability="optional"/>
-
 
 </blueprint>

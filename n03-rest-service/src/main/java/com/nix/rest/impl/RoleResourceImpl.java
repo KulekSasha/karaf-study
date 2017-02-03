@@ -16,18 +16,10 @@ public class RoleResourceImpl implements RoleResource {
     private static final Logger log = LoggerFactory.getLogger(RoleResourceImpl.class);
 
     private RoleDao roleDao;
+    @Context private UriInfo uriInfo;
 
-    @Context
-    private UriInfo uriInfo;
-
-    public void setRoleDao(RoleDao roleDao) {
-        log.debug("set up roleDao");
+    public RoleResourceImpl(RoleDao roleDao) {
         this.roleDao = roleDao;
-    }
-
-    public void setUriInfo(UriInfo uriInfo) {
-        log.debug("set up uriInfo");
-        this.uriInfo = uriInfo;
     }
 
     @Override

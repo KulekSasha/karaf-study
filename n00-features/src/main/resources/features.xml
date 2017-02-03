@@ -19,8 +19,8 @@
         <feature prerequisite="true">cxf</feature>
         <feature prerequisite="true">webconsole</feature>
         <feature prerequisite="true">user-app-datasource</feature>
-        <feature prerequisite="true">user-app-model</feature>
         <feature prerequisite="true">user-app-validator-hibernate</feature>
+        <feature prerequisite="true">user-app-model</feature>
         <feature>user-app-api</feature>
     </feature>
 
@@ -37,13 +37,13 @@
 
     <feature name="user-app-model" version="${pom.version}">
         <feature prerequisite="true">wrap</feature>
+        <feature prerequisite="true">jdbc</feature>
         <feature prerequisite="true">transaction</feature>
         <feature version="[1.0.4,1.0.4]" prerequisite="true">jpa</feature>
+        <feature prerequisite="true">jndi</feature>
         <feature prerequisite="true">hibernate</feature>
         <feature version="[5.2,6)" prerequisite="true">hibernate-orm</feature>
         <feature version="[5.3,6)" prerequisite="true">hibernate-validator</feature>
-        <feature prerequisite="true">jndi</feature>
-        <feature prerequisite="true">jdbc</feature>
         <bundle>mvn:${groupId}/${parent.artifactId}-model/${pom.version}</bundle>
     </feature>
 
@@ -56,7 +56,7 @@
         <bundle start-level="10">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.8.6
         </bundle>
         <bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-rest/${pom.version}</bundle>
-        <bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-soap/${pom.version}</bundle>
+        <!--<bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-soap/${pom.version}</bundle>-->
     </feature>
 
     <feature name="user-app-validator-hibernate" version="${pom.version}">
