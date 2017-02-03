@@ -35,7 +35,7 @@ public class UserAppInside_IT {
             "user-app-datasource",
             "user-app-model",
             "user-app-validator-hibernate",
-            "user-app-api-rest",
+            "user-app-api",
             "user-app-install-all",
     };
 
