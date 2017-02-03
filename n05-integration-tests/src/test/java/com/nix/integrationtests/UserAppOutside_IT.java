@@ -39,7 +39,7 @@ public class UserAppOutside_IT {
     private final static String ENDPOINT_ADDRESS = "http://localhost:8181/cxf/user-app/rest";
     private final static String USERS_ENDPOINT_ADDRESS = ENDPOINT_ADDRESS + "/users";
     private final static String WADL_ADDRESS = ENDPOINT_ADDRESS + "?_wadl";
-    private final static int AWAIT_TO_KARAF_INIT_SECONDS = 30;
+    private final static int AWAIT_TO_KARAF_INIT_SECONDS = 300;
 
     private static TestContainer container;
     private static ObjectMapper jsonMapper;

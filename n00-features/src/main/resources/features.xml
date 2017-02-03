@@ -55,7 +55,7 @@
         <bundle start-level="10">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.8.6</bundle>
         <bundle start-level="10">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.8.6
         </bundle>
-        <bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-rest/${pom.version}</bundle>
+        <bundle start-level="100">mvn:${groupId}/${parent.artifactId}-api-rest/${pom.version}</bundle>
         <!--<bundle start-level="20">mvn:${groupId}/${parent.artifactId}-api-soap/${pom.version}</bundle>-->
     </feature>
 

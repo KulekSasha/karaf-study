@@ -16,9 +16,10 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static com.nix.integrationtests.KarafBaseConfig.*;
+import static com.nix.integrationtests.KarafBaseConfig.getConfiguration;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -54,12 +55,24 @@ public class UserAppInside_IT {
         assertNotNull("BundleContext should not be null.", bundleContext);
         assertNotNull("FeaturesService should not be null.", featuresService);
 
+        TimeUnit.SECONDS.sleep(10);
+
         List<String> appBundles = Arrays.asList(APP_BUNDLES_NAMES);
 
-        List<Bundle> bundlesInContainer = Arrays.stream(bundleContext.getBundles())
-                .filter(b -> appBundles.contains(b.getSymbolicName()))
-                .filter(b -> b.getState() == Bundle.ACTIVE)
-                .collect(Collectors.toList());
+        int attempts = 10;
+        boolean isAllBundleCollected = false;
+        List<Bundle> bundlesInContainer = null;
+        while (attempts-- > 0 && !isAllBundleCollected) {
+            bundlesInContainer = Arrays.stream(bundleContext.getBundles())
+                    .filter(b -> appBundles.contains(b.getSymbolicName())).peek(b -> System.out.println("-" + b.getSymbolicName()))
+                    .filter(b -> b.getState() == Bundle.ACTIVE)
+                    .collect(Collectors.toList());
+            if (bundlesInContainer.size() == APP_BUNDLES_NAMES.length) {
+                isAllBundleCollected = true;
+            }
+            System.out.println("atm: " + attempts);
+            TimeUnit.SECONDS.sleep(1);
+        }
 
         assertEquals("expected quantity of installed and active bundles is " + APP_BUNDLES_NAMES.length,
                 APP_BUNDLES_NAMES.length, bundlesInContainer.size());

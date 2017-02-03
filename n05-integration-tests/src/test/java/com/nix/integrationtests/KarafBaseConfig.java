@@ -30,7 +30,7 @@ public interface KarafBaseConfig {
 
                 configureConsole().ignoreRemoteShell(),
 
-                logLevel(LogLevelOption.LogLevel.DEBUG),
+                logLevel(LogLevelOption.LogLevel.ERROR),
 
                 junitBundles(),
 
