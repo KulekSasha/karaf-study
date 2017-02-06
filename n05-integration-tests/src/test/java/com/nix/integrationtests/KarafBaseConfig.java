@@ -1,17 +1,18 @@
 package com.nix.integrationtests;
 
+import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.karaf.options.LogLevelOption;
 
 import java.io.File;
 
-import static org.ops4j.pax.exam.CoreOptions.junitBundles;
-import static org.ops4j.pax.exam.CoreOptions.maven;
+import static org.ops4j.pax.exam.CoreOptions.*;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 
-public interface KarafBaseConfig {
+public class KarafBaseConfig {
 
-    static Option[] getConfiguration() throws Exception {
+    @Configuration
+    public static Option[] getConfiguration() throws Exception {
         return new Option[]{
                 karafDistributionConfiguration().frameworkUrl(
                         maven().groupId("org.apache.karaf")
@@ -23,14 +24,15 @@ public interface KarafBaseConfig {
                         .unpackDirectory(new File("target/integration-tests/karaf/"))
                         .useDeployFolder(false),
 
-//                editConfigurationFilePut("etc/org.ops4j.pax.web.cfg",
-//                        "org.osgi.service.http.port", "8181"),
-
 //                keepRuntimeFolder(),
+
+                editConfigurationFilePut("etc/config.properties ","org.apache.aries.blueprint.synchronous","true"),
+
+                cleanCaches(true),
 
                 configureConsole().ignoreRemoteShell(),
 
-                logLevel(LogLevelOption.LogLevel.ERROR),
+                logLevel(LogLevelOption.LogLevel.WARN),
 
                 junitBundles(),
 

@@ -32,7 +32,7 @@
         <tx:transaction method="*" value="Required"/>
     </bean>
 
-    <service ref="roleDaoImpl" interface="com.nix.dao.RoleDao"/>
-    <service ref="userDaoImpl" interface="com.nix.dao.UserDao"/>
+    <service id="roleDaoService" ref="roleDaoImpl" interface="com.nix.dao.RoleDao"/>
+    <service id="userDaoService" ref="userDaoImpl" interface="com.nix.dao.UserDao"/>
 
 </blueprint>
